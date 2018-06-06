@@ -1,0 +1,26 @@
+﻿@using TheTennisProject_CoreNet.Models.Internals;
+
+@model AtpRankingModel
+@{
+    ViewData["Title"] = "AtpRanking";
+}
+<h2>@ViewData["Title"]</h2>
+<form method="post" action="/Home/AtpRanking">
+    <div class="form-group input-group-sm">
+        @Html.LabelFor(model => model.Date)
+        @Html.TextBoxFor(model => model.Date, new { @id = "datepicker", @class = "form-control datepicker" })
+        @Html.ValidationMessageFor(model => model.Date)
+    </div>
+    <input type="submit" value="OK" />
+</form>
+
+<div>
+    @{
+        foreach (AtpRanking single in Model.List)
+        {
+    <div>
+        @string.Format("{0} - {1} ({2}) - {3}", single.RollingRank, single.Player.Name, single.Player.Nationality, single.RollingPoints);
+    </div>
+        }
+    }
+</div>
